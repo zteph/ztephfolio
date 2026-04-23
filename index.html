@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>WS101 Portfolio | Stephanie Santos</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="controller.js" defer></script>
+</head>
+
+<body>
+<header>
+  <div class="header-left">
+    <img src="images/steph.jpg" alt="steph">
+    <p>Stephanie Santos</p>
+  </div>
+ 
+  <div class="header-center">
+    <h1>WS101 Portfolio</h1>
+  </div>
+ 
+  <div class="header-right">
+    <a href="register.html" id="registerBtn">REGISTER</a>
+    <button id="logoutBtn" style="display:none;">LOGOUT</button>
+    <button id="darkToggle">🌙|☀️</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <h1>MY PORTFOLIO</h1>
+
+  <div class="card">
+    <h2>About Me</h2>
+    <p>
+      Hello! I am <strong>Stephanie Santos</strong>, a 2nd year college student from
+      Our Lady of the Sacred Heart College of Guimba taking up
+      Bachelor of Science in Information Technology (BSIT).
+    </p>
+    <p>This educational portfolio showcases my projects from
+      <strong>Prelim, Midterm, and Finals</strong>. It demonstrates the skills I
+      have learned in HTML, CSS, and JavaScript.</p>
+  </div>
+
+  <div class="card">
+    <h2>Prelim Project</h2>
+    <a href="project/prelim/prelim.html" onclick="return guardLink(event, this.href)">View Prelim Task</a>
+  </div>
+
+  <div class="card">
+    <h2>Midterm Project</h2>
+    <a href="project/midterm/midterm.html" onclick="return guardLink(event, this.href)">View Midterm Task</a>
+  </div>
+
+  <div class="card">
+    <h2>Final Project</h2>
+    <a href="project/finals/finals.html" onclick="return guardLink(event, this.href)">View Final Task</a>
+  </div>
+
+  <div class="card">
+    <h2>Contact</h2>
+    <a href="contact.html">Contact Me</a>
+  </div>
+
+</div>
+
+<script>
+  function guardLink(event, href) {
+    if (localStorage.getItem("loggedIn") !== "true") {
+      event.preventDefault();
+      alert("Please log in first to view this content.");
+      window.location.href = "login.html";
+      return false;
+    }
+    return true;
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<link rel="stylesheet" href="style.css">
+<script src="controller.js" defer></script>
+</head>
+
+<body>
+
+<div class="login-container">
+
+<h1>Login</h1>
+
+<label>Username</label>
+<input type="text" id="loginUsername">
+
+<label>Password</label>
+
+<div class="password-box">
+  <input type="password" id="loginPassword">
+  <span class="show-btn" onclick="togglePassword('loginPassword',this)">Show</span>
+</div>
+
+<button onclick="loginUser()">Login</button>
+
+<div id="otpSection" style="display:none">
+
+<label>Enter OTP</label>
+<input type="text" id="otpInput">
+
+<button onclick="verifyOTP()">Verify OTP</button>
+
+</div>
+
+<p style="text-align:center; margin-top:10px;">
+Don't have an account?
+</p>
+
+<a href="register.html" class="link-btn">Register Here</a>
+
+<div id="messageBox" class="message-box"></div>
+
+</div>
+
+</body>
+</html>
