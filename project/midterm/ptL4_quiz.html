@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WS101 Portfolio | Stephanie Santos</title>
+<link rel="stylesheet" href="../pstyle.css">
+<script src="../midterm/mtask.js" defer></script>
+</head>
+<body>
+
+<header>
+<div class="logo">
+<img src="../pImages/steph.jpg" alt="logo">
+<span>Stephanie Santos</span>
+</div>
+
+<nav>
+<button id="darkToggle">🌙|☀️</button>
+<a href="../../index.html">HOME</a>
+<a href="../prelim/prelim.html">PRELIM</a>
+<a href="../midterm/midterm.html">MIDTERM</a>
+<a href="../finals/finals.html">FINALS</a>
+</nav>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>AI Answering Tool</h2>
+
+<p id="question1">Q1: What does "CPU" stand for?</p>
+<button onclick="document.getElementById('question1').innerHTML='Central Processing Unit'">Answer</button>
+
+<br><br>
+
+<p id="question2">Q2: What do we call the brain of the computer?</p>
+<button onclick="document.getElementById('question2').innerHTML='CPU'">Answer</button>
+
+<br><br>
+
+<p id="question3">Q3: What do you use to connect to the computer?</p>
+<button onclick="document.getElementById('question3').innerHTML='WiFi or Modem/Router'">Answer</button>
+
+</div>
+
+<div class="card">
+
+<h2>Basic Technology Quiz Tool</h2>
+
+<p id="timer">Time Left: 60s</p>
+
+<h3 id="question">Let's begin</h3>
+
+<label>
+<input type="radio" name="choice" id="optionA">
+<span id="textA"></span>
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="choice" id="optionB">
+<span id="textB"></span>
+</label>
+
+<br><br>
+
+<button id="submitBtn">Submit</button>
+
+<p id="feedback"></p>
+
+</div>
+
+</div>
+
+<footer>
+<p>&copy; Stephanie Santos | WS101</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+const questionText = document.getElementById('question');
+const optionA = document.getElementById('optionA');
+const optionB = document.getElementById('optionB');
+const textA = document.getElementById('textA');
+const textB = document.getElementById('textB');
+const submitBtn = document.getElementById('submitBtn');
+const feedback = document.getElementById('feedback');
+const timerDisplay = document.getElementById('timer');
+
+const questions = [
+{
+question: "1. Which of the following is software?",
+options: ["Keyboard", "Microsoft Word"],
+answer: "Microsoft Word"
+},
+{
+question: "2. What does RAM stand for?",
+options: ["Review Admittance Memory", "Random Access Memory"],
+answer: "Random Access Memory"
+},
+{
+question: "3. What does BIOS stand for?",
+options: ["Basic Input/Output System", "Between Input/Output System"],
+answer: "Basic Input/Output System"
+},
+{
+question: "4. What do you call the 'brain' of the computer?",
+options: ["Central Processing Unit", "System Software"],
+answer: "Central Processing Unit"
+},
+{
+question: "5. What is another word for applications?",
+options: ["Programs", "Hardware"],
+answer: "Programs"
+}
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+let timeLeft = 60;
+let timer;
+
+function startTimer(){
+timer = setInterval(function(){
+timeLeft--;
+timerDisplay.textContent = "Time Left: " + timeLeft + "s";
+
+if(timeLeft <= 0){
+clearInterval(timer);
+endQuiz();
+}
+},1000);
+}
+
+function loadQuestion(){
+
+const currentQuestion = questions[currentQuestionIndex];
+
+questionText.textContent = currentQuestion.question;
+
+optionA.value = currentQuestion.options[0];
+optionB.value = currentQuestion.options[1];
+
+textA.textContent = currentQuestion.options[0];
+textB.textContent = currentQuestion.options[1];
+
+feedback.textContent = "";
+
+optionA.checked = false;
+optionB.checked = false;
+}
+
+submitBtn.addEventListener('click', function(){
+
+const selectedOption = document.querySelector('input[name="choice"]:checked');
+
+if(!selectedOption){
+feedback.textContent = "Please select an answer.";
+feedback.style.color = "red";
+return;
+}
+
+if(selectedOption.value === questions[currentQuestionIndex].answer){
+score++;
+feedback.textContent = "Correct!";
+feedback.style.color = "green";
+}
+else{
+feedback.textContent = "Wrong!";
+feedback.style.color = "red";
+}
+
+currentQuestionIndex++;
+
+if(currentQuestionIndex < questions.length){
+setTimeout(loadQuestion,1000);
+}
+else{
+endQuiz();
+}
+
+});
+
+function endQuiz(){
+clearInterval(timer);
+questionText.textContent = "Quiz Finished!";
+feedback.textContent = "You got " + score + " correct answers out of " + questions.length + ".";
+submitBtn.disabled = true;
+}
+
+startTimer();
+loadQuestion();
+
+});
+</script>
+
+</body>
+</html>
